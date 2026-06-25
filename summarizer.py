@@ -17,7 +17,7 @@ Dependencies:
 • beautifulsoup4
 • google-genai"""
 
-def summarize_website(url):
+def summarize_website(url, summary_format):
     try:
         response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
         response.raise_for_status()
@@ -30,12 +30,13 @@ def summarize_website(url):
 
     text = soup.get_text(separator=" ")
     cleaned_text = " ".join(text.split())[:10000]
+    
+    if summary_format == "Bullet Points":
+        instruction = ["list the key points about this company or website"]
+    else:
+        instruction = ["write a brief, impressive 3-5 sentence summary of what this company or website is all about"]
 
-    prompt = (
-        "Read the following website text and write a brief, impressive 2-3 sentence "
-        "summary of what this company or website is all about:\n\n"
-        f"{cleaned_text}"
-    )
+    prompt = f"Read the following website text and {instruction[0]}:\n\n{cleaned_text}"
 
     client = genai.Client()
     try:
