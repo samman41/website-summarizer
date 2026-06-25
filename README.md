@@ -4,6 +4,14 @@ This script fetches the text content from a given website URL,
 parses it using BeautifulSoup to remove scripts and styles,
 and then uses the Google GenAI SDK to generate a concise summary of the company or website.
 
+Installation:
+
+To install the necessary dependencies, you must run the following command:
+pip install requests beautifulsoup4 google-genai
+
+Configuration:
+Configure your API key by creating a .env file and adding your Gemini API key.
+
 Usage:
 1. Run the script: python summarizer.py
 2. Enter the website URL when prompted.
